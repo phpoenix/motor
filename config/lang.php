@@ -18,7 +18,9 @@ return [
     // 多语言cookie变量
     'cookie_var'      => 'think_lang',
     // 扩展语言包
-    'extend_list'     => [],
+    'extend_list'     => [
+        // 'zh-cn'=>["D:\phpstudy_pro\WWW\motor\app\admin\lang\home.php"]
+    ],
     // Accept-Language转义为对应语言包名称
     'accept_language' => [
         'zh-hans-cn' => 'zh-cn',
