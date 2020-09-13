@@ -93,7 +93,7 @@ define(['jquery', 'bootstrap', 'toastr', 'layer', 'lang'], function ($, undefine
                         url = Config.moduleurl + "/" + url;
                     }
                 } else if (url.substr(0, 8) === "/addons/") {
-                    url = Config.__PUBLIC__.replace(/(\/*$)/g, "") + url;
+                    url = Config.__PUBLIC__? Config.__PUBLIC__.replace(/(\/*$)/g, "") + url : url;
                 }
                 return url;
             },
