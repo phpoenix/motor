@@ -239,7 +239,7 @@ class Backend extends BaseController
      */
     protected function loadlang($name)
     {
-        Lang::load(app()->getAppPath().'/lang/zh-cn'.str_replace('.', '/',
+        Lang::load(app()->getAppPath().'/lang/'.Lang::getLangset().'/'.str_replace('.', '/',
                 strtolower($name)).'.php');
     }
 
