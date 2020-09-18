@@ -13,6 +13,12 @@
 
 namespace think;
 
+//https安全域名token验证
+if(isset($_GET['echostr'])){
+	echo $_GET['echostr'];
+	exit;
+}
+
 // 判断是否安装fastadmin-tp6
 if (! is_file('../config/install.lock')) {
     header("location:./install.php");

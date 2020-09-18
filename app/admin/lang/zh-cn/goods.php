@@ -3,6 +3,7 @@
 return [
     'Id'            => 'ID',
     'Name'          => '商品名称',
+    'Merchant_id'   => '商户',
     'Hot'           => '为您推荐',
     'Bannerimage'   => '商品展示图片',
     'Price'         => '价格',

@@ -29,12 +29,15 @@ class Goods extends BaseModel
     ];
     
 
-    
+    public function merchant()
+    {
+        return $this->belongsTo('Merchant', 'merchant_id', 'id')->joinType('LEFT');
+    }
 
-
-
-
-
+    public function goodstype()
+    {
+        return $this->belongsTo('Goodstype', 'goodstype_id', 'id')->joinType('LEFT');
+    }
 
 
 }
