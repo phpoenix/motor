@@ -15,7 +15,7 @@ composer.lock
 !.gitkeep
 .gitignore
 .env
-.bowerrc
+
 .travis.yml
 /app/extra/addons.php
 /public/assets/js/addons.js
