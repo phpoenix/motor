@@ -26,7 +26,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     [
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
-                        {field: 'category', title: __('Category')},
+                        {
+                            field: 'category', title: __('Category'),
+                            searchList: {"1":__('Category 1'),"2":__('Category 2')},
+                            formatter: Table.api.formatter.normal
+                        },
                         {field: 'user.username', title: __('User_id')},
                         {field: 'booktime', title: __('Booktime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'telephone', title: __('Telephone')},
