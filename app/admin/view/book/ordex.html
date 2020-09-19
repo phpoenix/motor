@@ -5,27 +5,43 @@
 </head>
 <body>
     <h1 align="center">审核车辆</h1>
-    <table align="center" border="4"  cellpadding="10" width="550" height="180">
-        <thead align="center" valign="middle">
-            <tr >
-                <th>ID</th>
-                <th>用户</th>
-                <th>预约时间</th>
-                <th>接车文位置</th>
-                <th>通知消息</th>
-             </tr>
+    <table align="center" border="4"  cellpadding="1000" width="700" height="180">
+        <thead align="center" valign="middle" >
+        	<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+	        	<tr>
+			       <td width="20%"> <h2>用户：</h2> </td>
+			       <td> <h2>{$bock.user->username}</h2> </td>
+			        <td> <h2>模式</h2> </td>
+			        {if condition="$bock.category == 1"}
+			        	<td> <h2>全程代办</h2> </td>
+					{else /}
+						<td> <h2>自驾前往</h2> </td>
+					{/if}   
+			   	</tr>
+			   	<tr>
+			       <td><h2>预约时间</h2> </td>
+			        <td colspan="3"> <h2>{:date('Y-m-d',$bock.booktime)}</h2> </td>
+		        </tr>
+		        <tr>
+		        	 <td><h2>联系方式</h2> </td>
+		        	 <td colspan="3"> <h2>{$bock.telephone}</h2> </td>
+		        </tr>
+		        <tr>
+			       <td><h2>接车位置</h2> </td>
+			       <td colspan="3"> <h2>{$bock.position}</h2> </td> 
+		        </tr>
+		        <tr>	 
+			       <td> <h2>时间设定</h2> </td>
+			       <td colspan="3"> <h2 ><input id="meeting" type="date" /></h2> </td>
+			    </tr>
+			    <tr>
+			       	<td> <h2>通知</h2> </td>
+			       	<td colspan="3"> <h2><input type="text" name="fname" /><h2></td>
+		
+		        </tr>
+		        <td colspan="4" align="center" height="50px" ><input type="button" value="确定"/>
+	   		</form>
         </thead>
-        {volist name="bock" id="v"}
-        <tbody>
-            <tr>
-                <td>{$v.id}</td>
-                <td>{$v.user_id}</td>
-                <td>{$v.booktime}</td>
-                <td>{$v.position}</td>
-                <td>{$v.notice}</td>
-            </tr>
-         </tbody>
-         {/volist}
     </table> 
 </body>
 </html>

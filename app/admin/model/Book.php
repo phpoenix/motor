@@ -74,4 +74,5 @@ class Book extends BaseModel
         return $this->belongsTo('User', 'user_id', 'id')->joinType('LEFT');
     }
 
+
 }

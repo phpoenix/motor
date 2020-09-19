@@ -54,7 +54,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     text: __('预约审核'), 
                                     classname: 'btn btn-xs btn-primary btn-dialog',
                                     icon: 'fa fa-list',
-                                    url: 'book/order',
+                                    url: 'book/order/ids/{ids}',
+                               
                                     callback: function (data) {
                                         Layer.alert("接收到回传数据：" + JSON.stringify(data), {title: "回传数据"});
                                     },

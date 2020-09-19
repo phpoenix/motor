@@ -3,7 +3,7 @@
 namespace app\admin\controller;
 use app\admin\model\Book as bock;
 use app\common\controller\Backend;
-
+use think\Db;
 /**
  * 预约审车管理
  *
@@ -67,9 +67,9 @@ class Book extends Backend
      * 需要将application/admin/library/traits/Backend.php中对应的方法复制到当前控制器,然后进行修改
      */
     
-    public function order(){
-        $bock = Bock::select();
-        $this->view->assign('bock',$bock);
+    public function order($ids){
+        $bock = $this->model->with(['user'])->where('id',$ids)->find();
+        $this->view->assign('bock',$bock);  
         return $this->view->fetch("ordex");
     }
 
