@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>审核车辆</title>
+</head>
+<body>
+    <h1 align="center">审核车辆</h1>
+    <table align="center" border="4"  cellpadding="10" width="550" height="180">
+        <thead align="center" valign="middle">
+            <tr >
+                <th>ID</th>
+                <th>用户</th>
+                <th>预约时间</th>
+                <th>接车文位置</th>
+                <th>通知消息</th>
+             </tr>
+        </thead>
+        {volist name="bock" id="v"}
+        <tbody>
+            <tr>
+                <td>{$v.id}</td>
+                <td>{$v.user_id}</td>
+                <td>{$v.booktime}</td>
+                <td>{$v.position}</td>
+                <td>{$v.notice}</td>
+            </tr>
+         </tbody>
+         {/volist}
+    </table> 
+</body>
+</html>
+
+
