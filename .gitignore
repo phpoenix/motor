@@ -13,7 +13,9 @@ composer.lock
 *.log
 *.css.map
 !.gitkeep
-.svn
-.vscode
+.gitignore
+.env
+.bowerrc
+.travis.yml
 /app/extra/addons.php
 /public/assets/js/addons.js
