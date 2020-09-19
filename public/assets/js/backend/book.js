@@ -26,11 +26,16 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {checkbox: true},
                         {field: 'id', title: __('Id')},
                         {field: 'category', title: __('Category')},
-                        {field: 'user.name', title: __('User_id')},
+                        {field: 'user.username', title: __('User_id')},
                         {field: 'booktime', title: __('Booktime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'telephone', title: __('Telephone')},
                         {field: 'position', title: __('Position')},
-                        {field: 'status', title: __('Status')},
+                        {
+                            field: 'status', title: __('Status'),
+                            searchList: {"1": __('Status 1'),"2": __('Status 2'),"3": __('Status 3'),"4": __('Status 4')},
+                            icon: "fa fa-check-square-o",
+                            formatter: Table.api.formatter.normal
+                        },
                         {field: 'createtime', title: __('Createtime'), operate:'RANGE', addclass:'datetimerange', formatter: Table.api.formatter.datetime},
                         {field: 'operate', title: __('Operate'), table: table, events: Table.api.events.operate, formatter: Table.api.formatter.operate}
                     ]
