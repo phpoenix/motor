@@ -17,6 +17,7 @@ use think\facade\View;
 use think\facade\Event;
 use think\facade\Config;
 use app\common\library\Auth;
+use think\Request;
 
 /**
  * 前台控制器基类.
@@ -77,8 +78,14 @@ class Frontend extends BaseController
             //初始化
             $this->auth->init($token);
             //检测是否登录
-            if (! $this->auth->isLogin()) {
-                $this->error(__('Please login first'), 'index/user/login');
+            if($this->request->isMobile() || $this->request->isWeixin()){
+                if (!$this->auth->isLogin()) {
+                    $this->redirect(addon_url('third/index/connect', [':platform' => 'wechat','url' => "/".$modulename."/".$controllername."/".$actionname], false, true));
+                }
+            }else{
+                if (!$this->auth->isLogin()) {
+                    $this->error(__('Please login first'), 'index/user/login');
+                }
             }
             // 判断是否需要验证权限
             if (! $this->auth->match($this->noNeedRight)) {

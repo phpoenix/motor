@@ -5,6 +5,7 @@ namespace app\index\controller;
 use app\common\controller\Frontend;
 use app\admin\model\Book;
 use app\admin\validate\Book as Validate;
+use app\common\model\User;
 
 class Proxy extends Frontend
 {
@@ -35,7 +36,13 @@ class Proxy extends Frontend
 			//创建预定信息
 			$result = Book::create($data);
 			if($result){
-				return rescode(200,['data'=>$data]);
+				return rescode(200,[
+					'data'=>[
+						'username' => User::get($data['user_id'])->username,
+						'position' => $data['position'],
+						'booktime' => $params['date']
+					]
+				]);
 			}else{
 				return rescode(400,['error'=>'程序在处理审车流程时出现错误']);
 			}

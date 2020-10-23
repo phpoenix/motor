@@ -10,7 +10,7 @@ use app\admin\model\Goods;
 
 class Index extends Frontend
 {
-    protected $noNeedLogin = '*';
+    protected $noNeedLogin = '';
     protected $noNeedRight = '*';
     protected $layout = '';
 
@@ -34,7 +34,7 @@ class Index extends Frontend
         /**
          * 商户列表
          */
-        $merchant = Merchant::where('hot',1)->order('star,weigh','desc')->select();
+        $merchant = Merchant::where('hot',1)->order('star,weigh','desc')->limit(3)->select();
         foreach ($merchant as $key => &$value) {
             $value->banner='http://'.$_SERVER['HTTP_HOST'].$value->banner;
         }
