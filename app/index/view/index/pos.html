@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>当前位置</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        #pos-area {
+            background-color: #009DDC;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 100%;
+            overflow: scroll;
+            text-align: left;
+            color: white;
+        }
+        #demo {
+            padding: 8px;
+            font-size: small;
+        }
+        /*#btn-area {
+            height: 100px;
+        }
+        button {
+            margin-bottom: 10px;
+            padding: 12px 8px;
+            width: 42%;
+            border-radius: 8px;
+            background-color: #009DDC;
+            color: white;
+        }*/
+        #mapWrap {
+            margin: 1px 0;
+            width: 100%;
+            height: 100%;
+        }
+        .address{width: 94%;height: 25%;background-color: aliceblue;color: #333;border-top-left-radius: 10px;border-top-right-radius: 10px;position: fixed;top:75%;padding: 5% 3%;}
+        .address input{width:100%;height: 38px;background-color: rgb(10,99,191);border-radius: 15px;color: #FFFFFF;}
+        .address1{font-size: 16px;font-weight: bold;}
+        .address2{font-size: 12px;margin-top:6px;margin-bottom: 25px;}
+    </style>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>
+    <script type="text/javascript" src="https://apis.map.qq.com/tools/geolocation/min?key=MOFBZ-UI7WP-FNQDD-L3GGD-3ENVJ-QZFSD&referer=https://super.mynatapp.cc"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="pos-area">
+        <div id="mapWrap"></div>
+        <div class="address">
+            <div class="" style="float:left">
+                <div class="address1" id="address1"></div>
+                <div class="address2" id="address2"></div>
+            </div>
+            <a href="">
+                <div class="" style="float:right;margin-right: 16px;margin-top:8px;font-size: 16px;color: rgb(16,92,202);">刷新</div>
+            </a>
+            
+            <input type="button" onclick="complete()" value="开始填写" />
+        </div>
+    </div>
+    
+ 
+    <script type="text/JavaScript">
+
+        var latitude,longitude,province,city,district,street;
+        var options = {timeout: 9000};
+        var positionNum = 0;
+        var geolocation = new qq.maps.Geolocation();
+        var token;
+        document.getElementById("pos-area").style.height = (document.body.clientHeight - 110) + 'px';
+ 
+        geolocation.getLocation(showPosition, showErr, options);
+       
+        function showPosition(position) {
+            latitude = position.lat;
+            longitude = position.lng;
+            province = position.province;
+            city = position.city;
+            district = position.district;
+            street = position.addr;
+            var km = getGreatCircleDistance(latitude,longitude,'37.730943','112.736023');
+            console.log(km)
+        };
+   
+        function showErr() {
+            positionNum ++;
+            document.getElementById("demo").innerHTML += "序号：" + positionNum;
+            document.getElementById("demo").appendChild(document.createElement('p')).innerHTML = "定位失败！";
+            document.getElementById("pos-area").scrollTop = document.getElementById("pos-area").scrollHeight;
+        };
+
+        function init() {
+            token = localStorage.getItem("token");
+            var myLatlng = new qq.maps.LatLng(latitude, longitude);
+            var myOptions = {
+                zoom: 16,
+                center: myLatlng
+            };
+            var map = new qq.maps.Map(document.getElementById("mapWrap"), myOptions);
+            document.getElementById('address1').innerHTML = street;
+            document.getElementById('address2').innerHTML = province+" "+city+" "+district;
+        }
+ 
+        function loadScript() {
+            var script = document.createElement("script");
+            script.type = "text/javascript";
+            script.src = "https://map.qq.com/api/js?v=2.exp&key=MOFBZ-UI7WP-FNQDD-L3GGD-3ENVJ-QZFSD&callback=init";
+            document.body.appendChild(script);
+        }
+
+        function complete(){
+            if(token!=null){
+                window.location.href = "/index/test/getAccess&token="+token; 
+           }else{
+                window.location.href = "/index/test/getAccess&token="+token; 
+           }
+            
+        }
+
+        function getGreatCircleDistance(lat1,lng1,lat2,lng2){
+            var radLat1 = getRad(lat1);
+            var radLat2 = getRad(lat2);
+            var a = radLat1 - radLat2;
+            var b = getRad(lng1) - getRad(lng2);
+            var s = 2*Math.asin(Math.sqrt(Math.pow(Math.sin(a/2),2) + Math.cos(radLat1)*Math.cos(radLat2)*Math.pow(Math.sin(b/2),2)));
+            s = s*6378.137;
+            s = Math.round(s*10000)/10000.0;
+            return s;
+        }
+
+        function getRad(d){
+            var PI = Math.PI;
+            return d*PI/180.0;
+        }
+ 
+    </script>
+</body>
+<script>eruda.init();</script>
+</html>

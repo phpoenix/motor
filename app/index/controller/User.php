@@ -6,6 +6,7 @@ use think\facade\Event;
 use think\facade\Config;
 use think\facade\Cookie;
 use app\common\controller\Frontend;
+use app\admin\model\Book;
 
 /**
  * 会员中心.
@@ -257,5 +258,23 @@ class User extends Frontend
         $this->view->assign('title', __('Change password'));
 
         return $this->view->fetch();
+    }
+
+    /**
+     * 审车预约信息
+     */
+    public function book(){
+        $where = ['user_id'=>$this->auth->id, 'status'=>[1,2,3]];
+        $books = Book::where($where)->select();
+        foreach ($books as $key => $value) {
+            $list = $this->getStatusList();
+            $value->status = isset($list[$value->status]) ? $list[$value->status] : '';
+        }
+        return rescode(200, ['data'=>$books]);
+    }
+
+    public function getStatusList()
+    {
+        return ['1' => '等待通知', '2' => '请求通过', '3' => '被驳回', '4' => '已处理'];
     }
 }

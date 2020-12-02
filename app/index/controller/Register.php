@@ -17,7 +17,7 @@ class Register extends Frontend
 		$params = $this->request->post();
 		$data = [];
 
-		$data['user_id'] = 1;
+		$data['user_id'] = $this->auth->id;
 		$data['mobile'] = isset($params['mobile'])? $params['mobile'] :"13633516851";
 		$data['gender'] = isset($params['gender'])? $params['gender'] :2;
 		$data['province'] = isset($params['province'])? $params['province'] :"山西省";

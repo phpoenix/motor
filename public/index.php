@@ -39,7 +39,7 @@ function checkSignature()
     }
 }
 
-checkSignature();
+// checkSignature();
 
 // 判断是否安装fastadmin-tp6
 if (! is_file('../config/install.lock')) {
@@ -59,6 +59,18 @@ require __DIR__.'/../vendor/autoload.php';
 // if ($route == "carplatform") {
 // 	return true;
 // }
+
+
+// 设置允许其他域名访问
+header('Access-Control-Allow-Origin:*');
+header('content-type:application/json');
+ 
+// 设置允许的响应类型
+header('Access-Control-Allow-Methods:POST, GET');
+ 
+// 设置允许的响应头
+header('Access-Control-Allow-Headers:x-requested-with,content-type, origin, authorization, accept, client-security-token');
+
 
 // 执行HTTP应用并响应
 $http = (new App())->http;

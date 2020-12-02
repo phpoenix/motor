@@ -1113,3 +1113,19 @@ if (! function_exists('rescode')) {
         exit();
     }
 }
+
+if(!function_exists("debug")){
+    function debug(){
+        $backtrace = debug_backtrace();
+        echo "<pre>";
+        $stay = ['file','line','function','class'];
+        foreach ($backtrace as $key => $value) {
+            foreach ($value as $k => $v) {
+                if(!in_array($k, $stay))
+                unset($backtrace[$key][$k]);
+            }
+        } 
+        var_export($backtrace);
+        exit;
+    }
+}

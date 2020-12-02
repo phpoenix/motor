@@ -22,6 +22,7 @@ return [
     'Hot'            => '热门商户',
     'Weigh'          => '权重',
     'Poster'         => '海报',
+    'Service'        => '服务（@分割）',
     'Pcd'            => '省份城市地区结合',
     'Code'           => '最终地区code',
     'Createtime'     => '创建时间',

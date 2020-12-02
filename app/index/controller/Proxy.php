@@ -18,13 +18,16 @@ class Proxy extends Frontend
 		$data = [];
 		// $data = json_decode(html_entity_decode($data));
 		if(isset($params['type'])){
+			if (!isset($params['phone']) || !isset($params['date'])) {
+				return rescode(400,['error'=>'信息填写不完整']);
+			}
 			//todo 微信登录用户的id
 			$data['user_id'] = 1;
 			$data['category'] = $params['type'];
-			$data['position'] = $params['address'];
-			$data['lat'] = $params['latitude'];
-			$data['lng'] = $params['longitude'];
-			$data['telephone'] = $params['phone']? : '';
+			$data['position'] = isset($params['address']) ? $params['address'] : '';
+			$data['lat'] = isset($params['latitude']) ? $params['latitude'] : '';
+			$data['lng'] = isset($params['longitude']) ? $params['longitude'] : '';
+			$data['telephone'] = $params['phone'];
 			$data['status'] = 1;
 			$data['booktime'] = strtotime($params['date']);
 			

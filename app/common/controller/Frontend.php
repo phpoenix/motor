@@ -54,6 +54,7 @@ class Frontend extends BaseController
 
     public function _initialize()
     {
+        
         //移除HTML标签
         $this->request->filter('trim,strip_tags,htmlspecialchars');
         $modulename = app()->http->getName();
@@ -80,7 +81,7 @@ class Frontend extends BaseController
             //检测是否登录
             if($this->request->isMobile() || $this->request->isWeixin()){
                 if (!$this->auth->isLogin()) {
-                    $this->redirect(addon_url('third/index/connect', [':platform' => 'wechat','url' => "/".$modulename."/".$controllername."/".$actionname], false, true));
+                    $this->redirect(addon_url('third/index/connect', [':platform' => 'wechat','url' => "/".$modulename."/".$controllername."/storeToken"], false, true));
                 }
             }else{
                 if (!$this->auth->isLogin()) {
